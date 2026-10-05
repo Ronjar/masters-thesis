@@ -1,0 +1,1 @@
+sudo apt install libgdal-dev libgeos-dev libproj-dev libudunits2-dev libnode-dev libcairo2-dev libnetcdf-dev

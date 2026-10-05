@@ -1,0 +1,40 @@
+\subsubsection{Validity Checks and Robustness}
+
+The reliability of the results obtained from the regression is based on the validity of the underlying assumptions of the regression model.
+As the data is obtained from an observational study, where treatment is not randomly assigned, but based on the allocation of land through settlement schemes, potential confounding variables must be controlled.
+Several validity and robustness checks are performed and will be described in the following sections.
+
+First, a Covariate Balance Test is conducted to check the local randomization assumption of the RDD.
+If allocation of settlement schemes is random around the cutoff, then the pre-existing conditions and baseline properties at the border should transition without any discontinuity from one side to the other.
+To verify this assumption, the test is performed for two sets of properties, topographic and historical anthropogenic features.
+For topographic features, time-invariant features of the land, specifically elevation and slope obtained from the SRTM dataset, are used as dependent variables.
+Human settlement should not change these features, resulting in the $\tau$ of the regression being insignificant.
+For historical anthropogenic features, the shortest distance from each grid cell to a historic city center and the distance to the nearest colonial railroad are used as dependent variables.
+Testing for historical infrastructure features rules out the possibility of a selection bias driven by the proximity to existing markets.
+If settlement schemes had been placed near those infrastructure features, differences in vegetation health could be driven by prolonged human activity rather than the settlement schemes themselves.
+A significant $\tau$ would indicate this systematic difference in pre-existing conditions between the treatment and control group.
+In contrast to other statistical tests, including covariates into the RDD cannot be used to fix a broken study design.
+\textcite{cattaneoCovariateAdjustmentRegression2023} show that adding unbalanced covariates to the regression does not robustly restore the identification of the RDD,
+as restrictive and not testable assumptions about the data generation process would be required.
+As a result, the covariates used to improve the estimation strategy as described in the previous section are only used to increase the precision of the estimator.
+
+Second, from an ecological perspective, the MSE-optimal bandwidth could be too narrow to capture the full effect of settlement schemes on vegetation indices.
+Factors such as microclimate and change through human settlement are likely to influence the vegetation indices in neighboring grid cells.
+To ensure that the estimated treatment effect is not only valid in the immediate vicinity of the cutoff line, a robustness check is performed using two alternative bandwidths.
+For this purpose, larger bandwidths of 3000 and 9000 meters are used to check the estimator for a range of 10 and 30 times the size of one grid cell.
+
+Furthermore, treating settlement scheme borders as ground truth for treatment entails the risk of violating the Stable Unit Treatment Value Assumption (SUTVA),
+which requires that the treatment status of one unit does not affect the outcome of another unit.
+Such spatial spillover effects could occur for two reasons:
+First, settlers might have changed the vegetation of neighboring land outside the settlement scheme, for example by cutting trees for firewood or grazing livestock (encroachment),
+which will be covered in more detail in the following chapter.
+While completely enclosed settlement schemes were already excluded from the control group, grid cells located close to the cutoff line could still be affected by the treatment.
+This would lead to an underestimation of the true effect of settlement schemes, as the vegetation indices of neighboring grid cells outside the settlement scheme would be reduced.
+Second, historical maps of settlement scheme placement and their georeferencing could be inaccurate, and the plots actually allocated to settlers could differ from the official borders.
+To solve both issues, a \textit{Donut RDD} robustness check is performed by excluding all grid cells located within 300 meters of the cutoff line.
+
+Finally, assuming that the approximated borders of the settlement schemes and therefore the cutoff lines of non-georeferenced settlement schemes are accurate, could introduce spatial measurement errors.
+As detailed in \cref{sec:data}, the area of about 30\% of settlement schemes could not be reconstructed from historical maps and are therefore rendered as circles,
+calculated based on the allocated area and a point location of the center of the scheme.
+This inaccuracy could lead to a misclassification of treatment status for grid cells located close to the cutoff line, which will influence the estimated treatment effect.
+To rule this possibility out, a final robustness check is performed by excluding all grid cells from treatment and control groups associated with these settlement schemes from the regression.

@@ -1,0 +1,59 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Impact of Settlement Schemes on Vegetation}
+This study aims to evaluate the environmental impact of post-colonial settlement schemes in Kenya.
+By using a spatial regression discontinuity design, the study finds causal evidence that the allocation of land to a scheme significantly changes the local ecosystem.
+The significant reduction of vegetation health within scheme boundaries, measured in the baseline results using NDVI and NDMI, confirms Hypothesis 1.
+This finding is consistent with the literature indicating that permanent settlement \parencite{serneelsProximateCausesLanduse2001}, especially in previously forested regions \parencite{kinyanjuiNDVIbasedVegetationMonitoring2011} and conversion of large agricultural areas to smallholder farms \parencite{gitauColonialeraSettlementsPostcolonial2025} lead to a decline in vegetational health.
+While the estimates show significant effects, the magnitude of the treatment is relatively small, in the baseline the NDVI is reduced by $0.00593$.
+As the NDVI ranges from $-1$ to $1$, this reduction does not indicate a large change in vegetation health.
+Therefore, while the results show a significant effect, the practical implications of this effect are limited.
+
+\subsection{Land Tenure Security and Subsamples}
+While the subsample analysis shows significant effects for both registration periods, the comparison of the two subsamples shows no significant difference.
+This finding is not expected, as literature suggests that land tenure security incentivizes long-term investment in land such as soil conservation \parencite{goldsteinProfitsPowerLand2008,deiningerOverlappingLandRights2008,besleyLandReformPoverty2000}.
+As a result, Hypothesis 2 is rejected, as the results did not support a moderating effect of land tenure security on vegetation health.
+One explanation for this outcome could be the complexity of land tenure security and which aspects of it are most relevant for vegetation health.
+The distinction between de jure and de facto land rights in Kenya is particularly complex.
+As documented by \cite{ndunguReportComissionInquiry2004,booneLandConflictDistributive2012}, in some cases during the Moi period the de jure land rights of the settlers were disregarded by the government and land was redistributed.
+Adding to this, smallholder farms often did not seek a land title, which could be due to the costs of registration and the land title being of limited use in practice \parencite{placeEconomicEffectsLand1998}.
+In consequence, the issuance of a land title might be an insufficient measure of land tenure security, which could explain the lack of a moderating effect.
+
+\subsection{Forest Disturbance and Spillovers}
+The analysis of spillover effects provides evidence for a significant impact on nearby forested areas.
+Interestingly, the deforestation effects are only significant when excluding a 300m buffer around the cutoff line, which suggests that deforestation extends beyond the immediate boundaries.
+However, this contradicts the findings of \cite{brandtSustainableIntensificationDairy2018}, who shows that the strongest effects on surrounding areas are found directly at the border of a plot of land marked as farm.
+Explanations for this could be that the cutoff line was inaccurate, drawn based on inaccessible natural features not captured by covariates defined in \cref{sec:methods}, such as rivers or wetlands,
+or that deforestation along the settlement border is more likely to be noticed by the authorities.
+This theory of a more complex spillover effect is further supported by the results of the buffer robustness check, which shows fluctuations in significance for all specifications, except for the Donut specification.
+By excluding this 300m donut, the model compares areas that are more likely to be affected by settlement schemes.
+Therefore, Hypothesis 3 remains inconclusive, as the results provide evidence for a spillover, but only when accounting for the 300m buffer.
+The exact mechanisms remain unclear, and more data is needed to draw conclusions for an area this large and heterogeneous.
+
+\input{content/7_discussion/1_limitations}
+
+\subsection{Future Research}
+The previous limitations highlight the need for future research.
+To improve the impact of settlement schemes across different topics of research, data quality needs to be improved.
+Future research should focus on the collection of more georeferenced boundaries of settlement schemes and improve the accuracy of the existing boundaries.
+Adding to this, the boundaries derived from historical maps should be validated with local data and error margins should be reported, as impact on those are of particular interest.
+
+Second, a better framework for classification and assignment to the originator of spillover effects is needed.
+Data about the land use of surrounding areas, the economic situation of the settlers, and the nature of the local environment could help to better identify the origin of spillover effects.
+Furthermore, the identification and weighting of factors that influence the optimal bandwidth for the regression discontinuity design should be explored.
+The current approach of using a buffer around the cutoff line falls short of capturing the complexity of the situation.
+
+Despite its popularity, the use of NDVI and NDMI as a measure of vegetation health is limited.
+While the indices are widely used, the greenness of vegetation and the associated moisture content are only two aspects of vegetation health.
+Future research should explore the use of an index consisting of multiple indicators, such as soil quality, biodiversity, and fine-grained land use categories.
+The use of Artificial Intelligence to classify imagery by a multitude of factors, using tools like AlphaEarth \parencite{brownAlphaEarthFoundationsEmbedding2025}, could be a promising approach to improve the measurement of environmental outcomes.
+
+\subsection{Policy Implications}
+The implications of the findings of this study align with existing literature, by suggesting that the current system of allocation of settlement schemes is not sustainable and can be improved.
+Titling of land without proper enforcement of land rights and transparent institutions is not sufficient to incentivize long-term investment in land \parencite{kameri-mboteLandTenureLand2006}.
+Kenya has a long history of conflict over land, even after the colonial period, and a well-functioning and accessible legal framework could help to increase the perceived security of LTS.
+With the introduction of such a framework, future allocations should be accompanied by environmental requirements, such as the preservation of forested areas and the implementation of soil conservation measures, as intended by the REDD+ framework \parencite{naughton-trevesLandTenureTropical2014,pearsonGreenhouseGasEmissions2017,hosonumaAssessmentDeforestationForest2012}.
+
+Those findings show the importance of considering the environmental impact when implementing land redistribution programs.
+Combining secure land tenure rights with transparent environmental governance could lead to a break with the historical pattern of injustice while improving sustainability.

@@ -1,0 +1,8 @@
+{
+    "key": "ctrl+w",
+    "command": "editor.action.insertSnippet",
+    "when": "editorTextFocus && editorLangId == 'r'",
+    "args": {
+        "snippet": " |>\n"
+    }
+}

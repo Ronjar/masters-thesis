@@ -1,0 +1,105 @@
+\section{Data}
+\label{sec:data}
+
+To investigate the impact of settlement schemes on vegetation health and wealth distribution, this study relies on a combination of geographic, environmental, and socioeconomic data.
+The following section provides a complete overview of the data sources, how they were processed, the characteristics of the data, and any limitations.
+Most of the data was processed using the Google Earth Engine (GEE), and the data processing code is available on GitHub\footnote{\url{https://github.com/Ronjar/masters-thesis}}.
+
+\subsection{Historical and Administrative Geography}
+\paragraph{Administrative boundaries.}
+To establish the geographic limits of the study area, the national borders of Kenya were obtained from the Global Administrative Unit Layers (GAUL 2015) dataset provided by the \cite{faoGAUL2015}.
+The dataset provides a feature collection which was filtered to include only the national borders of Kenya, which is used in every later Earth Engine script to limit the data used for processing.
+For graphical representation, additionally, the county boundaries of Kenya were obtained from the level2 dataset of the same source.
+
+\paragraph{Settlement schemes.}
+This study uses the georeferenced settlement scheme dataset \parencite{lukaloKenyaSettlementSchemes2022} provided by \cite{boonePromisedLandSettlement2021}, which is the most comprehensive dataset on settlement schemes in Kenya to date.
+The dataset includes the locations and some additional properties of all 535 official settlement schemes created in Kenya between 1962 and 2016.
+For each scheme, the dataset provides the year of allocation, the year of registration, the area allocated, the type of scheme (conventional or squatter), and the number of individuals receiving land.
+Additionally, the dataset is split into two subsets, where one includes the exact geographic boundary of 365 settlement schemes,
+created using a compilation of 1500 digitized maps by Survey of Kenya, while the other records 168 schemes with unknown exact boundaries but a point location of the center of the scheme.
+Following the recommendation of \cite{boonePromisedLandSettlement2021}, the allocated area of the scheme is used to calculate a circle around the point location for the schemes with unknown boundaries.
+Both datasets are merged to create a complete dataset of boundaries, which is used to define the treatment area for the following analysis.
+
+\paragraph{Historical land use.}
+The regression discontinuity design (RDD) relies on a valid control group close to the treatment area.
+To ensure this comparability, the area of the former Kenya Highlands is necessary as most of the settlement schemes by area were implemented in this region.
+With no available digital dataset on the historical borders, an archival map published by Survey of Kenya in 1958 was georeferenced and digitized using QGIS.
+Georeferencing was done by matching the coordinate grid from the original map drawn in Arc 1960 coordinate reference system (CRS) to the same grid in modern World Geodetic System 1984 (WGS 84) CRS.
+From this georeferenced map, the Kenya Highlands and the Crown Forests were manually digitized.
+The original scale of 1:1,000,000 combined with the low grade of details in the map caused some uncertainty in the exact borders of the Kenya Highlands.
+
+
+\subsection{Remote Sensing and Land Cover Data}
+
+The study uses multiple remote sensing datasets, for which \cref{tab:desc_summary_stats} in the Appendix provides an overview of the descriptive statistics.
+The overview for the forest degradation and deforestation data is shown in \cref{tab:desc_forest_stats}.
+
+\paragraph{Vegetation health.}
+In the course of this thesis, two main indicators of vegetation health are used: the NDVI and the NDMI.
+The NDVI quantifies the chlorophyll content or overall greenness of vegetation, while the NDMI measures the moisture content of vegetation,
+making both suitable proxies for vegetation health, land cover change and local droughts \parencite{pettorelliUsingSatellitederivedNDVI2005,khanAssessingImpactLand2025}.
+Both indices are derived from Tier 1 Surface Reflectance Landsat satellite imagery, which is sourced from the United States Geological Survey (USGS) Earth Explorer via GEE.
+Landsat satellite imagery is chosen over other satellite imagery due to its long-term availability, high spatial resolution of 30 meters, and frequent revisit time of 16 days.
+Mathematically, the indices are calculated as normalized ratios of three spectral bands captured by the Landsat satellites:
+
+$$\mathrm{NDVI} = \frac{\rho_{NIR} - \rho_{RED}}{\rho_{NIR} + \rho_{RED}}$$
+$$NDMI = \frac{\rho_{NIR} - \rho_{SWIR}}{\rho_{NIR} + \rho_{SWIR}}$$
+where $\rho_{NIR}$ is the near-infrared light reflected by, $\rho_{RED}$ is the red light absorbed by, and $\rho_{SWIR}$ is the shortwave infrared light absorbed by vegetation.
+Values of both indices range from -1 to 1, where higher values indicate healthier vegetation.
+Rather than using a single point in time, the data is aggregated to three-year median values for three reasons: 
+(1) to smooth out short-term, seasonal or weather-induced fluctuations in vegetation health as observed by \parencite{lambinMonitoringForestDegradation1999,kinyanjuiNDVIbasedVegetationMonitoring2011}.
+(2) to overcome the issue of historical data gaps, caused by missing Landsat 4 and 5 images between 1985 and 1990 in eastern Africa, and
+(3) to compensate for high cloud coverage in the study area, particularly over the Kenya Highlands.
+For this purpose, each pixel of individual Landsat imagery is excluded if it is classified as cloud or cloud shadow by USGS.
+A more visual representation of the necessity of this aggregation is provided in the Appendix, where \cref{fig:desc_aggregationComparison} shows different aggregation intervals and highlights missing data.
+
+\begin{customfigure}[h]
+    \caption{Landsat 8 Bands}
+    \includegraphics[width=0.8\textwidth]{figureDescriptive_LandsatBands}
+    \label{fig:desc_landsatBands}
+    \fignotes{The different spectral bands of Landsat 8 used to calculate the NDVI and NDMI. The graph draws the ratio of reflected light on the y-axis and the different bands on the x-axis.
+    As explained in the legend, the three lines represent the reflectance ratio per band in regions with land cover classified as water, developed land, and vegetation.
+    In Landsat 8, the red band is band 4, the near-infrared band is band 5, and the shortwave infrared band is band 6.}
+\end{customfigure}
+
+
+While the NDVI is suitable for analyzing general vegetation and some differences between agricultural and forested land, it is not suitable for analyzing smaller differences in forest cover.
+With increasing canopy density, the NDVI loses sensitivity and underestimates vegetation changes \parencite{hueteSoiladjustedVegetationIndex1988}.
+Illustrated in \cref{fig:desc_landsatBands}, the difference between RED and NIR reflectance is smaller in built-up and cropland areas compared to tree cover and shrubland areas, which leads to a smaller NDVI value.
+However, the difference between wetlands and cropland is almost negligible, which leads to similar NDVI values for moist forest and completely cleared and agriculturally transformed land.
+In contrast, the NDMI is more sensitive to this differentiation, while the total difference in NDVI is larger than in NDMI, the relative difference between wetlands and tree cover compared to cropland and built-up land is larger in NDMI.
+As the primary goal of settlement schemes in this region was increasing agricultural land, the difference in calculated NDVI values is not able to capture the full extent of environmental impact.
+
+But even when using both indices, those are not able to distinguish between different types of forest cover, such as undisturbed tropical moist forest and disturbed or newly regenerated forest.
+This shortcoming can be observed in \cref{fig:desc_vegetationTimeComparison}, where panels (A) and (B) show an overall increase in NDVI values between 1984 and 2025, while panels (C) and (D) show degradation and deforestation of large areas of tropical moist forest in the same period.
+To overcome this, a second dataset is used to analyze the impact of settlement schemes specifically on tropical forest cover.
+
+\begin{customfigure}[h]
+    \caption{Vegetation Cover and Forest Loss}
+    \includegraphics[width=0.8\textwidth]{figureDescriptive_TimeComparison}
+    \label{fig:desc_vegetationTimeComparison}
+    \fignotes{Spatial data of vegetation cover and forest loss in the Kenya Highlands region (1984-2025).
+    Panels (A) and (B) show the NDVI values for the first and last three-year period of data availability.
+    Panels (C) and (D) show the Tropical Moist Forest dynamics from 1990 to 2025.
+    Panel (C) shows the forest cover in 1990 (green), while panel (D) shows the 2025 status, with remaining forest (green), disturbed forest (yellow), and deforested areas (orange).
+    Thin gray lines indicate county borders, the black line marks the country borders.}
+\end{customfigure}
+
+\paragraph{Forest cover and loss.}
+To evaluate the impact of settlement schemes on the tropical forest cover, another dataset derived from Landsat imagery is used.
+The Tropical Moist Forest dataset, provided by the European Commission's Joint Research Centre (JRC), in the context of this thesis named EU\_JRC\_TMF, is a global dataset of tropical forest cover and loss from 1990 to 2025 \parencite{vancutsemLongterm19902019Monitoring2021}.
+It provides annual maps of forest cover, forest loss, and forest gain at a spatial resolution of 30 meters, filtered to include only undisturbed tropical moist forest areas.
+Further, it distinguishes between undisturbed forest, degraded forest, and deforested areas, whereas other popular datasets, such as \cite{hansenHighResolutionGlobalMaps2013} only provide binary classification of forested and non-forested areas.
+In this dataset, undisturbed forest is defined as areas that have not experienced any significant human-induced disturbance since the beginning of the monitoring period.
+Forest degradation is defined as a disturbance in the tree cover canopy over a short period of time, while deforestation is defined as complete land cover change to nonforested land.
+As demonstrated for the Mau Forest in \cref{fig:desc_vegetationTimeComparison} panels (C) and (D), this distinction is important for analyzing the actual impact of settlement schemes,
+as it is temporary and caused by factors like selective logging \parencite{vancutsemLongterm19902019Monitoring2021}.
+
+\paragraph{Topographical data.}
+Data on local topography, specifically elevation and slope, are obtained from the Shuttle Radar Topography Mission (SRTM) dataset \parencite{farrShuttleRadarTopography2007}.
+This dataset provides a digital elevation model of the Earth's surface at a spatial resolution of 30 meters, which is used to extract elevation and calculate slope values.
+The SRTM dataset is chosen for its high spatial resolution and global coverage, especially as it matches the resolution of the previous spatial datasets.
+
+\paragraph{Nearby anthropogenic features.}
+Finally, data on nearby anthropogenic features, is obtained from a dataset provided by \cite{jedwabPermanentEffectsTransportation2016}.
+This dataset provides georeferenced locations of railroads built during the colonial period and cities with a population of more than 10,000 inhabitants on 1890 or 1900.

@@ -1,0 +1,29 @@
+
+\begin{tabular}{lcccccccc}
+\toprule
+\multicolumn{1}{c}{\textbf{ }} & \multicolumn{3}{c}{\textbf{Base}} & \multicolumn{2}{c}{\textbf{Bandwidth}} & \multicolumn{3}{c}{\textbf{Sub-Samples}} \\
+\cmidrule(l{3pt}r{3pt}){2-4} \cmidrule(l{3pt}r{3pt}){5-6} \cmidrule(l{3pt}r{3pt}){7-9}
+  & (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8)\\
+\midrule
+\addlinespace[0.3em]
+\multicolumn{9}{l}{\textit{\textbf{Panel A: Deforestation (\%)}}}\\
+\hspace{1em}Treatment effect & 3.438 & 3.303 & 9.116** & 4.882* & 5.273* & -0.293 & 0.147 & 1.239\\
+\hspace{1em}Robust std. error & (2.119) & (2.121) & (4.588) & (2.179) & (2.016) & (3.832) & (2.439) & (2.268)\\
+\hspace{1em}Subsample mean & 31.415 & 31.587 & 32.089 & 29.142 & 21.966 & 36.792 & 23.896 & 29.435\\
+\hspace{1em}Bandwidth (m) & 1,317 & 1,226 & 1,318 & 3,000 & 9,000 & 1,236 & 2,465 & 1,655\\
+\hspace{1em}Observations & 8,015 & 7,363 & 6,734 & 18,940 & 48,980 & 2,481 & 7,751 & 8,690\\
+\addlinespace[0.3em]
+\multicolumn{9}{l}{\textit{\textbf{Panel B: Degradation (\%)}}}\\
+\hspace{1em}Treatment effect & -1.437* & -1.285* & -0.375 & -1.803** & -2.344*** & -0.916 & -2.240** & -1.804**\\
+\hspace{1em}Robust std. error & (0.737) & (0.730) & (1.265) & (0.734) & (0.626) & (1.028) & (1.032) & (0.751)\\
+\hspace{1em}Subsample mean & 10.297 & 10.492 & 10.832 & 10.752 & 11.175 & 8.393 & 12.423 & 10.770\\
+\hspace{1em}Bandwidth (m) & 1,439 & 1,802 & 1,887 & 3,000 & 9,000 & 1,422 & 1,766 & 1,485\\
+\hspace{1em}Observations & 8,820 & 11,220 & 10,477 & 18,940 & 48,980 & 2,927 & 5,599 & 7,744\\
+\addlinespace[0.3em]
+\multicolumn{9}{l}{\textbf{Model specifications}}\\
+\hspace{1em}Forest edge covariate &  & \checkmark &  &  &  &  &  & \\
+\hspace{1em}Donut exclusion &  &  & \checkmark (300m) &  &  &  &  & \\
+\hspace{1em}Bandwidth estimation & MSE-optimal & MSE-optimal & MSE-optimal & 3000 & 9000 & MSE-optimal & MSE-optimal & MSE-optimal\\
+\hspace{1em}Analysis sample & Full & Full & Full & Full & Full & High density & Low density & Known only\\
+\bottomrule
+\end{tabular}

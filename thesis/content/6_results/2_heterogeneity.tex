@@ -1,0 +1,76 @@
+\subsection{Results for Heterogeneity Analysis}
+\label{subsec:results_heterogeneity}
+
+\begin{customltable}
+    \caption{Heterogeneity Results for different Subgroups of Settlement Schemes}
+    \label{tab:base_heterogeneity_results}
+    \setlength{\tabcolsep}{10pt}
+    \small
+    \tablerendering{tableBase_Heterogeneity}
+
+    \tabnotes{This table shows a subsample of the Baseline Spatial RDD estimates at a 3000m bandwidth, including covariates and unknown settlements.
+    Treatment effects, std. errors and means are multiplied by 100 for better readability.
+    Columns (1) and (2) split the sample into conventional and squatter schemes, based on classification by \cite{boonePromisedLandSettlement2021}.
+    Columns (3) and (4) split the sample into low and high population density settlements, based on the median population density per hectare of all settlements.
+    Columns (5) and (6) split the sample into fast and slow registration of allocated settlements, based on the median time between allocation and registration of all settlements.
+    Column (7) shows the specific results for the agricultural settlement schemes with a long registration period by restricting the sample to conventional, low density and slow registration settlements.
+    Point estimates are conventional, with robust standard errors clustered at the 1200m grid level. *** $p < 0.01$, ** $p < 0.05$, * $p < 0.1$.}
+\end{customltable}
+
+
+\cref{tab:base_heterogeneity_results} uses the same data as the main results table, shown in the same two-panel design.
+The focus of this table lies in using subsets of the main data to further strengthen the explanatory power of the model.
+Significance numbers as high as in \cref{tab:base_baseline_results} could not be achieved, but significant effects are consistent with observations from the previous chapter.
+All regressions have similar model specifications, with each using the MSE-optimal bandwidth,
+and the covariates elevation, slope, distance to the nearest colonial railroad and distance to the nearest colonial city.
+Additionally, the settlements with unknown boundaries have been excluded from all specifications.
+
+\paragraph{Scheme Type.}
+Columns (1) and (2) differentiate between conventional and squatter settlements.
+The assignment to a conventional scheme reduces both indices significantly, the NDVI by $0.00769$ and the NDMI by $0.00947$.
+When assigned to a squatter scheme, no significant change can be reported.
+This is expected, as squatter schemes are often allocated in less fertile and forested areas.
+However, the great difference in the number of observations could also lead to this outcome.
+This difference is due to the fact that almost none of the schemes allocated in the region of the Kenya Highlands are squatter schemes.
+With fewer observations, the standard error increases which in turn could reduce significance.
+
+\paragraph{Population Density.}
+Columns (3) and (4) differentiate between low density and high density settlements.
+This can be used to further test the explanatory power of the first two columns as most conventional schemes had a low population density suitable for agricultural land use.
+Analogous to column (1), the assignment to a low density scheme reduces the NDVI significantly by $0.00868$ and the NDMI by $0.01075$.
+In contrast to insignificant squatter schemes, the allocation of land to a high density scheme causes a reduction of $0.00681$ in NDMI, significant at the 10\% level.
+While this is an interesting change, this could be due to the High/Low cutoff using a median split, which in turn did balance the observations.
+
+\paragraph{Registration Period.}
+The next two columns (5) and (6) compare fast registration periods and slow registration periods.
+This is used to test for Hypothesis 2.
+First, the fast registration period has a negative impact of $0.00792$ on NDMI, once again at the 10\% level.
+Interestingly, the schemes with slow registration periods experience significant NDVI and NDMI reductions at the 5\% level by $0.00719$ and $0.00955$, with standard errors reduced by about 10\%.
+Observations split almost evenly between the two subsets.
+To test for Hypothesis 2, it is necessary to conduct a $Z$-test to compare the two coefficients.
+$$Z = \frac{TE_6 - TE_5}{\sqrt{SE^2_6 + SE^2_5}} \approx -0.29$$
+This $Z$-score is not significant, and while the negative impact of settlement is significant, the null hypothesis of equal coefficients cannot be rejected.
+As a result, it is not possible to draw conclusions about the differences between the two registration periods, and Hypothesis 2 cannot be confirmed.
+
+\begin{customfigure}
+    \caption{Regression Discontinuity Plot for Column (7) of \cref{tab:base_heterogeneity_results}}
+    \includegraphics[width=0.6\textwidth]{figureBase_NDMI_HCOMBI}
+    \label{fig:base_ndmi_hcombi}
+    
+    \fignotes{This figure shows the LATE on NDMI aggregated for the time period 2023 to 2025.
+    Observations used for the regression are a subset of the main dataset, including only conventional, low density and slow registration settlements.
+    Dots represent data aggregated in 300m bins for visual representation, the regression line is based on the full dataset.
+    The slightly visible gray shaded areas represent the 90\% confidence intervals.}
+\end{customfigure}
+
+\paragraph{Combined subset of conventional, low density and slow registration.}
+Column (7) shows the results for a combined subset of conventional, low density and slow registration settlements.
+For a better understanding of how this looks from a geographical perspective,
+\cref{fig:base_ndmi_hcombi} shows the development of NDMI in both the treatment and control groups, with the cutoff line at 0m.
+The assignment to this subset reduces the NDVI by $0.00864$ and the NDMI by $0.01206$, significant at the 10\% and 5\% level respectively.
+This is the highest reduction in NDMI of all subsets, and the second-highest reduction in NDVI.
+However, the MSE-optimal bandwidth for this subset is larger compared to the other subsets, 
+which could introduce effects into the model that are not present at the cutoff line and in other subsets.
+
+While once again, many of the results are significant, the treatment effects still remain small in magnitude.
+This will be further discussed in \cref{subsec:limitations}.

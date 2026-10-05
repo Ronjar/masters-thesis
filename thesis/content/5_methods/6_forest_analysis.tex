@@ -1,0 +1,45 @@
+
+The existing framework for baseline and heterogeneity analysis is appropriate for the analysis of vegetational health, but not for the analysis of forest cover and loss.
+This is due to the logarithmic nature of NDVI and NDMI, which has important shortcomings when analyzing tropical moist forests due to their dense, green canopy and their inability to categorize pixel differences as degraded or deforested, as explained in \cref{sec:data}.
+Therefore, the empirical strategy for the analysis of forest cover and loss is based on the EU JRC TMF dataset, which provides two different classifications for forest events.
+First, the dataset provides a binary classification for deforested pixels and second, a classification for disturbed pixels, which is aggregated for each year of degradation.
+Both are aggregated to 300m grid cells, with the mean of deforested pixels creating a deforestation percentage per cell.
+For disturbance percentage per cell, the mean of the sum of total disturbances of all pixels in the cell is divided by the total number of years.
+These two classifications are used as the dependent variables for the Spatial RDD model in a two-panel design.
+As settlement schemes have been established alongside the forest edge, or the forest has been cleared close to the allocation of plots,
+only 8.8 / 17.7 percent of degradation / deforestation in the study area occurs within the settlement scheme boundaries.
+
+\begin{customfigure}
+    \caption{Example of Treatment Assignment in the Study Area}
+    \includegraphics[width=0.8\textwidth]{figureForests_TStructure}
+    \label{fig:forests_tstructure}
+    
+    \fignotes{This figure shows the same corner as \cref{fig:base_grids}.
+    The red area represents the settlement scheme (treatment), while the white area represents the control group.
+    The red line is the settlement scheme boundary (cutoff line), which forms a cross shape with the forest edge.
+    The green area represents the forest cover in 1990, the blue-scaled pixels the frequency of degradation.
+    The grid represents the 300m aggregation with the cell degradation value as a dot in the center.}
+\end{customfigure}
+
+To calculate the effect of settlement schemes on forest cover and loss and to answer H3, forest grid cells inside the study area are assigned to the closest settlement scheme or counterfactual.
+This assignment is based on the settlement boundary, which is in many cases not the exact forest edge.
+To prevent small differences between boundaries and forest edges from creating non-existent thin counterfactuals and thus assigning the forest to the control group, the classification of forest grid cells is adjusted.
+A buffer of negative 300m followed by a buffer of positive 300m is applied to the control group, leading to a cleaned-up counterfactual without areas thinner than 300m.
+After this adjustment, the forest grid cells are assigned to the closest settlement scheme or counterfactual, based on the distance to their respective boundaries.
+Potential inaccuracies of this assignment are addressed by conducting a sensitivity analysis.
+For this purpose, the assignment is repeated with buffers of 0m, 150m, 450m and 600m to test the robustness of the results.
+Furthermore, with forests being the object of the analysis and to prevent the artificial creation of a forest edge,
+all tree-covered areas with a size smaller than 2 hectares are excluded from the analysis, as they are not considered to be part of the tropical moist forest ecosystem.
+\cref{fig:forests_tstructure} shows an example of the model structure for the analysis, which forms a cross shape defined by the cutoff line between treatment and control group and the forest edge.
+
+In the Spatial RDD model, the distance to the settlement boundary remains the running variable.
+Like in the existing framework, covariates are used to improve the precision of the estimates through reduction of residual variance.
+Clustering is done in the same way as in the baseline analysis, at a superordinate level of 1200m.
+Following the recommendation of \cite{brandtSustainableIntensificationDairy2018}, distance to the forest edge is also tested as a covariate,
+with the argument that the probability of deforestation and degradation is linked to the accessibility of the forest in the grid cell.
+
+Finally, in accordance with the baseline analysis, the estimations for deforestation and degradation are subjected to multiple robustness checks.
+First, a Donut RDD is applied, to account for small spillovers such as incorrectly tiled settlement boundaries or precision errors in treatment assignment.
+Second, a bandwidth sensitivity analysis is conducted, by using a bandwidth of 3000 meters and 9000 meters.
+Third, subsample analyses are conducted, by differentiating between high density and low density settlement schemes,
+using the median settlers per square kilometer, and finally, by excluding schemes with unknown exact boundaries.

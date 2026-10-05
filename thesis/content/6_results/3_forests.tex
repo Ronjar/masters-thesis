@@ -1,0 +1,59 @@
+\subsection{Forest Results}
+\label{subsec:results_forests}
+
+
+\begin{customltable}
+    \caption{Main Results for Forest Impact (Deforestation and Degradation)}
+    \label{tab:forests_results_panel}
+    \setlength{\tabcolsep}{10pt}
+    \small
+    \tablerendering{forests/tableForests_300}
+
+    \tabnotes{This table shows the LATE of settlement schemes on deforestation and degradation, with all specifications including geographic covariates (elevation, slope, distance to colonial railroad and city).
+    Columns (1) to (3) show the base specifications: (1) is the baseline model using the MSE-optimal bandwidth, (2) additionally controls for the distance to the forest edge, and (3) applies a 300m donut exclusion around the cutoff.
+    Columns (4) and (5) show different bandwidths, (4) uses a 3000m and (5) a 9000m bandwidth.
+    Columns (6) and (7) split the sample into high- and low-density schemes, based on classification by \cite{boonePromisedLandSettlement2021}.
+    Column (8) restricts the sample to settlements with known georeferenced locations, excluding settlements approximated by circles.
+    Point estimates are conventional, with robust standard errors clustered at the 1200m grid level. *** $p < 0.01$, ** $p < 0.05$, * $p < 0.1$.}
+\end{customltable}
+
+\cref{tab:forests_results_panel} shows the results for the impact of settlement schemes on deforestation and degradation, now using forest data as the outcome variable instead of NDVI and NDMI.
+The results show that in the base regression in column (1), the assignment to a settlement scheme increases deforestation of nearby forests by 7.7 percentage points, significant at the 5\% level.
+Additionally controlling for the distance to the forest edge in column (2) yields an increase of 7.5 percentage points, significant at the 10\% level.
+As this also increases the standard error, it can be concluded that the distance to the forest edge is not a suitable covariate.
+When excluding the 300m donut around the cutoff in column (3), the effect increases to 9.6 percentage points, significant at the 1\% level.
+Compared to that, the effect of settlement schemes on degradation is not significant in any of the specifications.
+
+To understand the difference between the basic and donut specification, \cref{fig:forests_deforestation} shows the spatial distribution of deforestation across the cutoff line, symbolized by the vertical line at 0m.
+In this figure, deforestation reaches a minimum near the cutoff line by dropping to roughly 0.4\% on the control side and 0.6\% on the treatment side and increasing with greater distance in both directions.
+This pattern explains why excluding the boundary transition zone in the donut specification yields a substantially larger treatment effect.
+
+The robustness checks in columns (4) and (5) support this finding, as with increasing the bandwidth to 3000m in column (4) the effect of settlement schemes loses significance to the 10\% level and the standard error increases, although the number of observations increases.
+This can also be seen in \cref{fig:forests_deforestation}, where the gray area showing the standard error first decreases and then increases again when approaching the 3000m bandwidth.
+Column (5) shows the results for a 9000m bandwidth, which loses statistical significance and shows differences in treatment effects and especially subsample mean.
+This is likely due to the fact that at this bandwidth, the forest assigned to the treatment group is not comparable to the forest assigned to the control group.
+The spatial distribution at this bandwidth, shown in \cref{fig:forests_Deforestation9000m}, shows vast changes in the second half of both groups compared to the first half.
+Those changes explain why results obtained here cannot be used to support or invalidate the results of the base regression.
+
+Finally, columns (6) to (8) show the results for different subsamples, splitting the sample into high- and low-density schemes, and excluding settlements with unknown boundaries.
+While the results for high-density schemes show a positive coefficient and for low-density schemes a negative coefficient, both are not significant and carry large standard errors.
+From a mathematical perspective, it is important to point out that the small number of observations, especially in the high-density schemes, could be a major contributor to this outcome.
+The last column once again includes only settlements with known boundaries.
+Unlike the results from the baseline analysis in \cref{subsec:results_baseline}, using this subsample does not improve the outcomes, but rather eliminates significance.
+As sample size and standard error remain similar to the base regression, this result can be explained by the reduction of the treatment effect, which is now at 4.6\% compared to 7.7\% in the base regression.
+
+\begin{customfigure}[h!]
+    \caption{Regression Discontinuity Plot for Column (1) of \cref{tab:forests_results_panel}}
+    \includegraphics[width=0.6\textwidth]{figureForests_Deforestation}
+    \label{fig:forests_deforestation}
+    
+    \fignotes{This figure shows the Regression Discontinuity plot for Deforestation, with the cutoff line at 0m.
+    The regression is based on column (1) of \cref{tab:forests_results_panel}, using the MSE-optimal bandwidth, including the full sample and covariates.
+    Dots represent data aggregated in 300m bins of mean deforestation for visual representation.
+    The gray area shows the 95\% confidence interval of the regression.}
+\end{customfigure}
+
+Results of the robustness check of the 300m buffer are shown in the Appendix in \hyperref[tab:forests_base]{Table7-10}, showing that the base, distance to forest edge, and 3000m bandwidth specifications react sensitively to a change in buffer size.
+Interestingly, the Donut specification remains significant over all tested buffer sizes, with the treatment effect staying between $8.25\%$ and $9.95\%$.
+The Covariate Balance Tests for all buffer specifications, shown in \cref{tab:forests_cbt}, are all insignificant, indicating no pre-existing jump at the cutoff for any of the covariates and specifications.
+This further supports the validity of the results.

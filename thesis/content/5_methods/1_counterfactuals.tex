@@ -1,0 +1,24 @@
+\subsubsection{Identification Strategy for Study Area and Counterfactual}
+To estimate the causal environmental impact of the settlement schemes requires solving the problem of causal inference.
+It is impossible to observe the same grid cell in both a treated and untreated state, so isolating the causal effect of settlement schemes requires establishing a valid counterfactual.
+One empirical approach could be to compare the vegetation of the schemes with unassigned land in Kenya, for example at random locations around the settlement scheme.
+However, due to the spatial selection bias, this would result in heavily biased estimates.
+The areas of established settlement schemes were not chosen randomly, as the main goal of conventional schemes was to create agricultural production.
+Plots for this reason were selected based on their agricultural potential, such as favorable climatic conditions and soil fertility.
+As can be seen in \cref{fig:desc_map}, most of the settlements were implemented on the former Kenya Highlands, a region that is partly covered by dense forest and crossed by water bodies and mountain ranges.
+Any observed differences in environmental outcomes between settlements and random unassigned land could as well reflect preexisting, omitted geographical properties rather than a causal impact of human population.
+
+To counter this endogeneity problem, this study restricts the counterfactual to grid cells located in the former Kenya Highlands around the implemented schemes, with a maximum distance of 9000 meters.
+To prevent the generation of internal boundary lines and therefore an incorrect counterfactual, adjacent settlement schemes are merged into unified treatment areas, a visualization of which can be seen in \cref{fig:desc_superSettlements}.
+Additionally, to ensure the validity of the counterfactual, two filters are applied to the control group:
+First, the area of the former Crown Forests, which were not allocated to colonial settlers, is excluded from the control group, as these areas were not designated for agricultural use, which could be due to inadequate ecological conditions.
+Second, counterfactual areas completely surrounded by settlement schemes are removed from the analysis as well. These untreated areas are likely subjected to comparable ecological conditions as the treatment group,
+which could distort the estimation of the treatment effect, as they are assigned to the control group.
+The remaining areas likely have similar geographic characteristics, as they were subjected to the same selection criteria and land use patterns.
+
+The method used in this thesis, Spatial Regression Discontinuity Design (Spatial RDD), requires that
+\textquote{a geographic or administrative boundary splits units into treated and control areas and analysts make the case that the division into treated and control areas occurs in an as-if random fashion} \parencite{keeleGeographicBoundariesRegression2015}.
+While the placement of settlement schemes in areas like the Rift Valley region was intentional, the exact drawing of plot borders was subjected to a multitude of factors.
+\textcite{leoLandClassKenya1984} mentions that the land bought from European settlers and converted to settlement borders by the Regional Boundaries Commission was selected based on ethnic lines.
+This and factors like the time of sale for each plot of land result in a de facto randomization of land allocation from an ecological perspective.
+It is assumed that the grid cells marginally located inside the schemes and located outside in the former Kenya Highlands are identical in all characteristics, except for their treatment status.

@@ -1,0 +1,34 @@
+\subsubsection{Heterogeneity Analysis}
+
+The baseline analysis of the impact of settlement schemes on vegetation health assumes that the effect is homogeneous across all settlement schemes.
+However, as discussed in \cref{sec:background}, settlement schemes in Kenya were implemented with different objectives and therefore properties, which may impact the treatment effect.
+Variations include the type of settlement scheme, the density of settlement, and the period of tenure insecurity, defined as the time between allocation and registration.
+To uncover potential mechanisms, a heterogeneity analysis is conducted by dividing the sample into subgroups based on these characteristics.
+The sample is divided into two subgroups for each characteristic, and the regression discontinuity design is applied to each subgroup separately.
+
+First, to analyze variability caused by different land use, the settlement schemes are divided into conventional schemes and squatter schemes.
+As conventional schemes were pre-planned land plots designed to provide land for large-scale agricultural production, these areas were formally surveyed and split into plots before allocation.
+In contrast, squatter schemes were mostly created to formalize existing informal settlements of otherwise landless individuals, where the main land use was subsistence farming.
+The differences in land use could lead to different impacts on land cover change and varying resources could lead to different land management possibilities.
+
+Second, the environmental impact of human settlement may depend on the population density of settlement.
+Using the number of individuals receiving land relative to the total area of the scheme, the sample is divided at the median into high density and low density settlements.
+The effect of higher density could lead to more intensive land use, as subsistence farmers have less ability to leave land fallow and may need to clear more land in demand for NTFPs, leading to overexploitation.
+On the other hand, lower density settlements are designated for agricultural production, which may lead to more intensive land use and higher deforestation rates.
+Additionally, with larger plots, the benefit for sustainable agriculture such as manure management is lower compared to smaller plots, as more land is available in case of decreasing soil quality \parencite{brandtSustainableIntensificationDairy2018}.
+
+Third, the period of tenure insecurity may also impact the willingness of settlers to invest in sustainable land management practices.
+Using the year of allocation and the year of registration, the duration of tenure insecurity is calculated for each settlement scheme.
+The sample is divided at the median duration into fast registration and slow registration schemes.
+During the period of tenure insecurity, settlers may be less willing to invest in sustainable land management practices, such as planting trees or fallowing land, and more likely to overexploit the land.
+In contrast, once the land is formally registered, the secure claim to the land enables settlers to access credit and invest in long-term improvements to the land.
+This will be used to test Hypothesis 2, which states that the negative impact of settlement schemes differs based on the duration of tenure insecurity.
+For this purpose, a Z-test is conducted in order to be able to compare the coefficients of the two subgroups and test for significant differences.
+
+Finally, to isolate the interaction of these characteristics, a combined subset is analyzed.
+It consists of settlement schemes that are conventional schemes, with low density, and a slow registration process.
+This specific subset represents large settlement schemes on fertile soil designated for agricultural production, with low demographic pressure for overexploitation.
+However, due to the long registration period, this subset is suitable to analyze the impact of tenure insecurity on vegetation health.
+
+For each subgroup, the model specifications used are the same as in the last specification of the baseline analysis.
+These include the same covariates as in the baseline analysis, the MSE-optimal bandwidth, and the exclusion of settlement schemes with unknown boundaries.

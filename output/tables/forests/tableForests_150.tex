@@ -1,0 +1,29 @@
+
+\begin{tabular}{lcccccccc}
+\toprule
+\multicolumn{1}{c}{\textbf{ }} & \multicolumn{3}{c}{\textbf{Base}} & \multicolumn{2}{c}{\textbf{Bandwidth}} & \multicolumn{3}{c}{\textbf{Sub-Samples}} \\
+\cmidrule(l{3pt}r{3pt}){2-4} \cmidrule(l{3pt}r{3pt}){5-6} \cmidrule(l{3pt}r{3pt}){7-9}
+  & (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8)\\
+\midrule
+\addlinespace[0.3em]
+\multicolumn{9}{l}{\textit{\textbf{Panel A: Deforestation (\%)}}}\\
+\hspace{1em}Treatment effect & 6.360 & 6.084 & 9.796** & 7.302 & 6.057** & 9.357 & -6.189* & 2.599\\
+\hspace{1em}Robust std. error & (3.801) & (3.803) & (4.423) & (4.009) & (2.770) & (7.337) & (4.159) & (4.355)\\
+\hspace{1em}Subsample mean & 32.910 & 32.498 & 32.926 & 31.684 & 23.002 & 36.401 & 25.760 & 31.414\\
+\hspace{1em}Bandwidth (m) & 1,534 & 1,457 & 1,663 & 3,000 & 9,000 & 1,306 & 2,279 & 1,383\\
+\hspace{1em}Observations & 4,175 & 3,781 & 4,755 & 12,933 & 45,841 & 1,158 & 3,396 & 2,667\\
+\addlinespace[0.3em]
+\multicolumn{9}{l}{\textit{\textbf{Panel B: Degradation (\%)}}}\\
+\hspace{1em}Treatment effect & -0.300 & -0.176 & 0.213 & -1.722 & -1.082*** & 2.116 & -1.268 & -0.449\\
+\hspace{1em}Robust std. error & (1.185) & (1.200) & (1.432) & (1.243) & (0.776) & (1.986) & (1.760) & (1.211)\\
+\hspace{1em}Subsample mean & 9.221 & 8.734 & 9.298 & 9.823 & 11.270 & 7.513 & 10.860 & 9.674\\
+\hspace{1em}Bandwidth (m) & 1,692 & 1,401 & 1,695 & 3,000 & 9,000 & 1,217 & 2,009 & 2,031\\
+\hspace{1em}Observations & 4,993 & 3,532 & 4,934 & 12,933 & 45,841 & 984 & 2,749 & 5,546\\
+\addlinespace[0.3em]
+\multicolumn{9}{l}{\textbf{Model specifications}}\\
+\hspace{1em}Forest edge covariate &  & \checkmark &  &  &  &  &  & \\
+\hspace{1em}Donut exclusion &  &  & \checkmark (300m) &  &  &  &  & \\
+\hspace{1em}Bandwidth estimation & MSE-optimal & MSE-optimal & MSE-optimal & 3000 & 9000 & MSE-optimal & MSE-optimal & MSE-optimal\\
+\hspace{1em}Analysis sample & Full & Full & Full & Full & Full & High density & Low density & Known only\\
+\bottomrule
+\end{tabular}

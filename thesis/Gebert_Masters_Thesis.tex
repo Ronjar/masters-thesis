@@ -1,0 +1,60 @@
+\documentclass[11pt,a4paper]{masters_thesis}
+
+\addbibresource{bibliography.bib}
+
+
+
+\newcommand{\myInstitute}{Institute of Economics and Law}
+\newcommand{\myDepartment}{Macroeconomics and Digital Change}
+\newcommand{\myUniversity}{University of Stuttgart}
+\newcommand{\myStreet}{Keplerstraße 17}
+\newcommand{\myCity}{70184 Stuttgart}
+
+\newcommand{\myTitle}{Unsettled Ground: A Spatial RDD Analysis of Environmental and Wealth Outcomes in Kenya's Settlement Schemes (1962-2025)}
+\newcommand{\myShortTitle}{Environmental Impact of Settlement Schemes in Kenya}
+\newcommand{\myAuthor}{Robin Gebert}
+\newcommand{\myCourse}{Economics M.Ed.}
+\newcommand{\mySupervisor}{Jun.-Prof. Dr. Richard Bluhm}
+\newcommand{\myStartDate}{2026-06-17}
+\newcommand{\myEndDate}{2026-10-05}
+\renewcommand{\myAbstract}{
+This thesis investigates the causal environmental effects of post-colonial resettlement using settlement schemes in Kenya.
+For this purpose, an extensive dataset of historic settlement scheme boundaries is combined with high-resolution satellite imagery of vegetation cover, especially forest cover.
+By applying a spatial regression discontinuity design (Spatial RDD), the study shows that allocation of land for settlement schemes has a significant and permanent negative impact on vegetation cover, measured by NDVI and NDMI.
+Furthermore, the study finds evidence of a spillover effect, contributing to a higher level of deforestation in adjacent areas.
+In contrast to expectations, no evidence of a significant effect of land tenure security, measured by time between allocation and registration, on vegetation cover is found.
+These results highlight the importance of considering environmental consequences when implementing resettlement programs, as the ecological costs exceed the plot boundaries, affecting surrounding areas, and undermining long-term sustainability.
+}
+
+\begin{document}
+
+\maketitle
+
+\input{content/1_introduction/introduction}
+\input{content/2_theory/theory}
+\input{content/3_literature/literature}
+\input{content/4_data/data}
+\input{content/5_methods/methods}
+\input{content/6_results/results}
+\input{content/7_discussion/discussion}
+\input{content/8_conclusion/conclusion}
+
+
+\newpage
+
+\printbibliography
+
+\newpage
+\input{content/9_appendix/appendix}
+
+\IfFileExists{statements/plagiat.pdf}{
+    \clearpage
+    \thispagestyle{empty}
+    \null
+    \clearpage
+
+    \includepdf{statements/plagiat.pdf}
+    \includepdf[pages={1-}]{statements/ki.pdf}
+}
+
+\end{document}

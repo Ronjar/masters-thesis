@@ -1,0 +1,155 @@
+\appendix
+
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+\renewcommand{\thetable}{\thesection.\arabic{table}}
+
+\setcounter{figure}{0}
+\setcounter{table}{0}
+
+\section{Additional Analysis}
+
+\begin{customfigure}
+    \caption{Index Calculation using different Levels of Time Aggregation}
+    \includegraphics[width=\textwidth]{figureDescriptive_AggregationComparison}
+    \label{fig:desc_aggregationComparison}
+    
+    \fignotes{The figure shows the NDVI calculated from Landsat data for Kenya in three different levels of aggregation.
+    NDVI values range from -1 to 1, here shown as a color scale from red to green.
+    Cloudy pixels with cloud cover > 0.3 are shown in blue, and missing pixels are shown in gray.
+    As Landsat imagery has a revisit time of 16 days, one month results in the aggregation of only 2-3 images, and therefore less data to compensate for invalid data.
+    The left panel shows the NDVI aggregated over a span of three years (1984-1986) with 0\% invalid data,
+    the middle panel shows the NDVI aggregated over the span of one year (1985) with about 14\% cloudy and 13\% missing pixels,
+    and the right panel shows the NDVI aggregated over the span of 1 month (March 1985) with about 23\% cloudy and 42\% missing pixels.
+    }
+\end{customfigure}
+\clearpage
+
+\begin{customfigure}
+    \caption{Settlement Schemes as used in the Analysis}
+    \includegraphics[width=0.8\textwidth]{figureDescriptive_SuperSettlements}
+    \label{fig:desc_superSettlements}
+    
+    \fignotes{The figure shows the settlement scheme polygons of schemes in the Kenya Highlands as used in the analysis.
+    The red polygons represent the settlement schemes with known boundaries, while the red circles represent the settlement schemes with unknown boundaries.
+    The yellow polygon borders represent the settlement schemes as used in the analysis, which include non-settlement areas fully enclosed by settlement schemes.
+    The thin black lines represent the county borders, and the thick black lines represent the national borders of Kenya.
+    }
+\end{customfigure}
+\clearpage
+
+\begin{customltable}
+    \caption{Vegetation Index and Covariate Descriptive Statistics inside the Study Region (300m Grid Level)}
+    \label{tab:desc_summary_stats}
+    \tablerendering{tableDescriptive_Environment}
+    \tabnotes{The table shows the descriptive statistics of the means and standard deviations of the variables used in the analysis, aggregated to a 300m grid level.
+    The three columns show the descriptive statistics for the full study region, the treatment group, and the control group.
+    The rows show the mean and standard deviation of the NDVI, NDMI, terrain elevation and slope, the distance to the nearest colonial railroad and city.
+    Control group represents the entire Kenya Highlands excluding forests (type 0) and implemented settlement schemes.
+    Standard deviations are reported in parentheses.}
+\end{customltable}
+\clearpage
+
+\begin{customfigure}
+    \caption{Comparison of a Settlement Scheme and associated Counterfactual (2026)}
+    \includegraphics[width=\textwidth]{figureDescriptive_TCComparison}
+    \label{fig:desc_treatment_control_diff}
+
+    \fignotes{The figure shows a comparison of the Sotik East Settlement Scheme and its counterfactual area at its southern border, captured in 2026.
+    Both areas appear to be used similarly, with a mix of agricultural land and housing.}
+\end{customfigure}
+\clearpage
+
+
+\section{Additional Results}
+
+\begin{customfigure}
+    \caption{Forest Regression Discontinuity Plot with 9000m Bandwidth}
+    \includegraphics[width=0.8\textwidth]{figureForests_Deforestation9000m}
+    \label{fig:forests_Deforestation9000m}
+    
+    \fignotes{This figure shows the Regression Discontinuity plot for deforestation at a 9000m bandwidth.
+    The regression is based on column (1) of \cref{tab:forests_results_panel}, using the MSE-optimal bandwidth, including the full sample and covariates.
+    Dots represent data aggregated in 300m bins of mean deforestation for visual representation.
+    The gray area shows the 95\% confidence interval of the regression.}
+\end{customfigure}
+\clearpage
+
+\begin{customltable}
+    \caption{Forest Regression Results with no Buffer}
+    \label{tab:forests_base}
+    \setlength{\tabcolsep}{10pt}
+    \small
+    \tablerendering{forests/tableForests_base}
+
+    \tabnotes{This table shows the LATE of settlement schemes on deforestation and degradation, with all specifications including geographic covariates (elevation, slope, distance to colonial railroad and city).
+    The buffer used to exclude observations around the cutoff from being assigned to the control group is set to 0m.
+    Columns (1) to (3) show the base specifications: (1) is the baseline model using the MSE-optimal bandwidth, (2) additionally controls for the distance to the forest edge, and (3) applies a 300m donut exclusion around the cutoff.
+    Columns (4) and (5) show different bandwidths, (4) uses a 3000m and (5) a 9000m bandwidth.
+    Columns (6) and (7) split the sample into high- and low-density schemes, based on classification by \cite{boonePromisedLandSettlement2021}.
+    Column (8) restricts the sample to settlements with known georeferenced locations, excluding settlements approximated by circles.
+    Point estimates are conventional, with robust standard errors clustered at the 1200m grid level. *** $p < 0.01$, ** $p < 0.05$, * $p < 0.1$.}
+\end{customltable}
+\clearpage
+
+\begin{customltable}
+    \caption{Forest Regression Results with 150m Buffer}
+    \label{tab:forests_150}
+    \setlength{\tabcolsep}{10pt}
+    \small
+    \tablerendering{forests/tableForests_150}
+
+    \tabnotes{This table shows the LATE of settlement schemes on deforestation and degradation, with all specifications including geographic covariates (elevation, slope, distance to colonial railroad and city).
+    The buffer used to exclude observations around the cutoff from being assigned to the control group is set to 150m.
+    Columns (1) to (3) show the base specifications: (1) is the baseline model using the MSE-optimal bandwidth, (2) additionally controls for the distance to the forest edge, and (3) applies a 300m donut exclusion around the cutoff.
+    Columns (4) and (5) show different bandwidths, (4) uses a 3000m and (5) a 9000m bandwidth.
+    Columns (6) and (7) split the sample into high- and low-density schemes, based on classification by \cite{boonePromisedLandSettlement2021}.
+    Column (8) restricts the sample to settlements with known georeferenced locations, excluding settlements approximated by circles.
+    Point estimates are conventional, with robust standard errors clustered at the 1200m grid level. *** $p < 0.01$, ** $p < 0.05$, * $p < 0.1$.}
+\end{customltable}
+\clearpage
+
+\begin{customltable}
+    \caption{Forest Regression Results with 450m Buffer}
+    \label{tab:forests_450}
+    \setlength{\tabcolsep}{10pt}
+    \small
+    \tablerendering{forests/tableForests_450}
+
+    \tabnotes{This table shows the LATE of settlement schemes on deforestation and degradation, with all specifications including geographic covariates (elevation, slope, distance to colonial railroad and city).
+    The buffer used to exclude observations around the cutoff from being assigned to the control group is set to 450m.
+    Columns (1) to (3) show the base specifications: (1) is the baseline model using the MSE-optimal bandwidth, (2) additionally controls for the distance to the forest edge, and (3) applies a 300m donut exclusion around the cutoff.
+    Columns (4) and (5) show different bandwidths, (4) uses a 3000m and (5) a 9000m bandwidth.
+    Columns (6) and (7) split the sample into high- and low-density schemes, based on classification by \cite{boonePromisedLandSettlement2021}.
+    Column (8) restricts the sample to settlements with known georeferenced locations, excluding settlements approximated by circles.
+    Point estimates are conventional, with robust standard errors clustered at the 1200m grid level. *** $p < 0.01$, ** $p < 0.05$, * $p < 0.1$.}
+\end{customltable}
+\clearpage
+
+\begin{customltable}
+    \caption{Forest Regression Results with 600m Buffer}
+    \label{tab:forests_600}
+    \setlength{\tabcolsep}{10pt}
+    \tablerendering{forests/tableForests_600}
+
+    \tabnotes{This table shows the LATE of settlement schemes on deforestation and degradation, with all specifications including geographic covariates (elevation, slope, distance to colonial railroad and city).
+    The buffer used to exclude observations around the cutoff from being assigned to the control group is set to 600m.
+    Columns (1) to (3) show the base specifications: (1) is the baseline model using the MSE-optimal bandwidth, (2) additionally controls for the distance to the forest edge, and (3) applies a 300m donut exclusion around the cutoff.
+    Columns (4) and (5) show different bandwidths, (4) uses a 3000m and (5) a 9000m bandwidth.
+    Columns (6) and (7) split the sample into high- and low-density schemes, based on classification by \cite{boonePromisedLandSettlement2021}.
+    Column (8) restricts the sample to settlements with known georeferenced locations, excluding settlements approximated by circles.
+    Point estimates are conventional, with robust standard errors clustered at the 1200m grid level. *** $p < 0.01$, ** $p < 0.05$, * $p < 0.1$.}
+\end{customltable}
+\clearpage
+
+\begin{customtable}[p]
+    \caption{Covariate Balance Tests for Forest Regression}
+    \label{tab:forests_cbt}
+    \tablerendering{tableForests_CBT}
+
+    \tabnotes{The table shows the results of the Covariate Balance Tests for the baseline Spatial RDD using five panels with the different allocation buffers.
+    Panel A shows the distance to the nearest forest edge in meters.
+    Panel B shows the geographic elevation in meters above sea level, Panel C shows the slope in degrees,
+    Panel D shows the distance to the nearest colonial railroad in meters, and Panel E shows the distance to the nearest colonial city in meters.
+    Point estimates are conventional, with robust standard errors clustered at the 1200m grid level. *** $p < 0.01$, ** $p < 0.05$, * $p < 0.1$.}
+\end{customtable}
+\clearpage

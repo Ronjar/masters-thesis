@@ -1,0 +1,33 @@
+\subsubsection{Estimation Strategy}
+\label{subsubsec:methods_estimation_strategy}
+
+To estimate the causal effect ($\tau$) without distortion, this thesis does not use a global Ordinary Least Squares (OLS) regression over the complete dataset.
+This would assign observations with greater distance from the cutoff line the same weight as observations made close to the boundary.
+As omitted geographical variables such as soil quality and microclimate change with increasing distance to the cutoff line, this would create a large bias in the estimator.
+
+Instead, \cref{eq:1} is estimated using a Local Polynomial Regression (LPR), based on the method proposed by \cite{calonicoRdrobustPackageRobust2015} implemented in the R package \texttt{rdrobust}.
+This  method performs two steps before estimating the local polynomial regression:
+
+First, it selects an optimal bandwidth ($h$) using a data-driven procedure based on minimizing the mean squared error (MSE), which is based on the bias and variance of the estimator.
+Due to the high resolution spatial data used in this thesis, the variance approaches asymptotically zero, which causes the MSE to be dominated by the bias, and therefore selecting a narrow bandwidth around the cutoff line.
+
+Second, the observations within the selected bandwidth are weighted using a triangular kernel,
+which assigns a weight of 1 to observations at the cutoff and a weight of 0 to observations at the bandwidth limit and beyond, with a linear decrease in between.
+Finally, the LPR uses these weights to perform a Weighted Least Squares (WLS) regression.
+This decreases the omitted variable bias of the estimator, as observations closer to the settlement boundary are more likely to be similar in unobserved geographical and anthropogenic properties,
+and therefore differences in the respective vegetation index are more likely to be caused by the treatment status.
+
+Furthermore, the model is extended by including a vector of covariates ($X_i$) to further reduce the variance of the estimator.
+Covariates used in the model are time-invariant geographical properties such as elevation and slope, which are likely to have an impact on the vegetation and are not affected by the treatment.
+Those variables included are used for increasing the statistical efficiency, as a valid RD design does not require control variables.
+By including them, the model can filter out non-treatment noise from the error term, which results in reduced standard errors.
+This narrows down the confidence interval of the estimator, without affecting the point estimate itself.
+
+While this LPR is more robust to omitted variable bias and therefore more likely to estimate the true causal effect,
+in this state the model treats every observation with the same distance to the cutoff line equally, regardless of differences in the general area of the settlement scheme.
+For statistical inference, this introduces a critical problem: The model assumes that the error terms are independent and identically distributed, which is not the case for high-resolution spatial data.
+The vegetation indices of a specific grid cell are likely to correlate with those of neighboring grid cells, as they are only 300 meters apart, and thus, share similar weather conditions, soil quality, and land use.
+This spatial autocorrelation results in positively correlated error terms within a region,
+and treating close cells as independent observations leads to a shrinking of the standard error and an overestimation of the statistical significance of the results.
+To account for this issue, the standard errors are clustered in a super-grid of 1200 meters, which is four times the size of the aggregated grid cell, which can be seen in \cref{fig:base_grids}.
+This allows for correlation of error terms within the same super-grid, while still treating different super-grids as independent observations.

@@ -1,0 +1,37 @@
+\subsubsection{The Spatial Regression Discontinuity Design}
+
+A Spatial Regression Discontinuity Design uses a geographic boundary as an arbitrary threshold (cutoff), at which the treatment status changes abruptly, thereby creating a discontinuity.
+The underlying strategy of this design is to compare observations located in close spatial proximity to one another on opposite sides of this boundary.
+As geographic and climatic conditions at such a fine scale change smoothly, any jump in the dependent variable at the cutoff line can be attributed to the treatment.
+
+In this context, the distance to the border is used as the running variable ($D_i$).
+For every observation or grid cell ($i$), the shortest distance from its center to the border of a settlement scheme is calculated.
+To reduce spatial noise, the unit of observation is defined as an aggregated grid cell of 300 meters by 300 meters, representing the average vegetation of 100 single Landsat pixels, as can be seen in \cref{fig:base_grids}.
+
+\begin{customfigure}[h!]
+    \caption{Example of the Grid Structure in the Study Area}
+    \includegraphics[width=0.8\textwidth]{figureBase_Grids}
+    \label{fig:base_grids}
+    
+    \fignotes{This figure shows the southeastern corner of Shamata Settlement Scheme in Nyandarua County.
+    The red area represents the settlement scheme (treatment), while the area outside the scheme represents the control group.
+    The yellow to blue scaled pixels represent the mean NDVI values for the 2023-2025 period.
+    The white grid represents the 300m aggregation with the mean NDVI value of each cell as a dot in the center.
+    The black grid represents the 1200m super-grid, which is used for standard error clustering.}
+\end{customfigure}
+
+The cells located within the treatment area receive a positive distance and are assigned to the treatment group ($T_i = 1$).
+Surrounding unsettled but comparable areas receive a negative distance and together make up the control group ($T_i = 0$).
+
+Based on this spatial data structure, the following regression model is used to estimate the local average treatment effect (LATE) of the settlement schemes:
+\begin{equation}
+    Y_i = \alpha + \tau T_i + \beta_1 D_i + \beta_2 (T_i \times D_i) + \gamma X_i + \varepsilon_i\label{eq:1}
+\end{equation}
+
+where $Y_i$ represents the dependent variable, vegetation health, for each grid cell.
+To capture different aspects of environmental change, the equation is estimated separately for NDVI and NDMI as dependent variables.
+$T_i$ and $D_i$ are the binary treatment indicator and the running variable as defined above. 
+The coefficient of interest is $\tau$, showing the discrete jump of the dependent variable at the cutoff line ($D_i = 0$).
+$\beta_1$ measures the slope on the control side, while $\beta_2$ captures the change of slope on the treatment side, which enables both sides of the RDD to have independent trends.
+To absorb residual variance, $X_i$, a vector of covariates (elevation, slope, distance to the nearest colonial railroad and distance to the nearest colonial city), is used together with the coefficient vector $\gamma$ measuring the impact of covariates on the dependent variable.
+Finally, $\alpha$ represents the intercept and $\varepsilon_i$ the error term with standard errors clustered as detailed in \cref{subsubsec:methods_estimation_strategy}.

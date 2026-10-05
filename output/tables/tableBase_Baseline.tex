@@ -1,0 +1,27 @@
+
+\begin{tabular}{lcccccc}
+\toprule
+  & (1) & (2) & (3) & (4) & (5) & (6)\\
+\midrule
+\addlinespace[0.3em]
+\multicolumn{7}{l}{\textit{\textbf{Panel A: NDVI}}}\\
+\hspace{1em}Treatment effect & -0.707** & -0.593** & -0.009 & -0.356** & -0.397 & -0.702***\\
+\hspace{1em}Robust std. error & (0.311) & (0.260) & (0.477) & (0.268) & (0.237) & (0.277)\\
+\hspace{1em}Sample Mean & 60.941 & 60.943 & 60.513 & 60.282 & 58.315 & 61.385\\
+\hspace{1em}Bandwidth (m) & 1,072 & 1,047 & 1,011 & 3,000 & 9,000 & 1,091\\
+\hspace{1em}Observations & 79,013 & 77,459 & 48,885 & 161,845 & 287,329 & 67,943\\
+\addlinespace[0.3em]
+\multicolumn{7}{l}{\textit{\textbf{Panel B: NDMI}}}\\
+\hspace{1em}Treatment effect & -0.786** & -0.726*** & -0.300 & -0.464** & -0.500* & -0.907***\\
+\hspace{1em}Robust std. error & (0.315) & (0.263) & (0.440) & (0.268) & (0.237) & (0.288)\\
+\hspace{1em}Sample Mean & 14.431 & 14.438 & 13.967 & 13.777 & 12.182 & 14.765\\
+\hspace{1em}Bandwidth (m) & 1,084 & 1,079 & 1,088 & 3,000 & 9,000 & 1,121\\
+\hspace{1em}Observations & 79,686 & 79,357 & 53,464 & 161,845 & 287,329 & 69,383\\
+\addlinespace[0.3em]
+\multicolumn{7}{l}{\textbf{Model specifications}}\\
+\hspace{1em}Covariates &  & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark\\
+\hspace{1em}Donut RDD exclusion &  &  & \checkmark (300m) &  &  & \\
+\hspace{1em}Exclude unknown area &  &  &  &  &  & \checkmark\\
+\hspace{1em}Bandwidth estimation & MSE-optimal & MSE-optimal & MSE-optimal & 3000 & 9000 & MSE-optimal\\
+\bottomrule
+\end{tabular}

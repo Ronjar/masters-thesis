@@ -1,0 +1,117 @@
+\subsection{Baseline Results}
+\label{subsec:results_baseline}
+
+\begin{customfigure}[h!]
+    \caption{Covariate Continuity and Vegetation Health Discontinuity}
+    \includegraphics[width=0.45\textwidth]{figureBase_CBT_Elevation}
+    \includegraphics[width=0.45\textwidth]{figureBase_NDMI}
+    \label{fig:base_cbt_ndmi}
+    
+    \fignotes{In both panels, the figure tracks settlement schemes from 1965 to 2013 with a bandwidth of 3000m with control group (left) and treatment group (right) from the cutoff line.
+    The left panel shows there is no difference in time-invariant elevation and slope between the treatment and control group.
+    The right panel tracks the LATE on NDMI aggregated for the time period 2023 to 2025.
+    Dots represent data aggregated in 300m bins for visual representation, the regression line is based on the full dataset.
+    The slightly visible gray shaded areas represent the 90\% confidence intervals.}
+\end{customfigure}
+
+\cref{fig:base_cbt_ndmi} provides a visual representation of the RD design's main assumption of discontinuity after treatment assignment.
+The left panel of the figure shows that there is no significant discontinuity in elevation between the treatment and control group, as the two regression lines are almost identical in slope.
+Despite being calculated from more recent data, it can be safely assumed that the elevation of the land has not changed significantly over time, as it is a time-invariant variable.
+In contrast, the right panel of \cref{fig:base_cbt_ndmi} shows a significant discontinuity in vegetation health, measured by the NDMI, between the treatment and control group,
+with the trend of healthier vegetation towards the cutoff line in the control group not continuing into the treatment group.
+This proves that the treatment assignment of settlement schemes has a significant impact on vegetation health, which will be further analyzed in the following sections.
+
+
+\subsubsection{Covariate Balance Testing}
+
+\begin{customtable}
+        \caption{Covariate Balance Tests for Baseline Model}
+        \label{tab:base_cbt_results}
+        \setlength{\tabcolsep}{15pt}
+        \tablerendering{tableBase_CBT}
+
+        \tabnotes{The table shows the results of the Covariate Balance Tests for the baseline Spatial RDD using four panels with different bandwidths.
+        Panel A shows the geographic elevation in meters above sea level, Panel B shows the slope in degrees,
+        Panel C shows the distance to the nearest colonial railroad in meters, and Panel D shows the distance to the nearest colonial city in meters.
+        The different bandwidths used are the 3000m, 9000m and MSE-optimal bandwidth, which varies for every panel.
+        Point estimates are conventional, with robust standard errors clustered at the 1200m grid level. *** $p < 0.01$, ** $p < 0.05$, * $p < 0.1$.}
+    \end{customtable}
+
+Before looking at the results of the vegetation indices, \cref{tab:base_cbt_results} shows the results of the Covariate Balance Tests for the baseline Spatial RDD with different bandwidths.
+For the design to be valid, the covariates should transition smoothly across the cutoff line, with no significant discontinuity between the treatment and control group.
+
+Panel A evaluates geographic elevation. While the treatment effect is statistically insignificant for the MSE-optimal bandwidth ($17.925$m, mean $2014.142$m) and the 3000m bandwidth ($21.095$m, mean $2002.546$m), it becomes significant at the 10\% level for the 9000m bandwidth ($29.286$m, mean $1982.574$m).
+However, a difference of roughly 29 meters in elevation on a mean of 1982 meters is negligible in a geospatial context.
+
+A similar pattern can be observed for the slope in Panel B. Statistically significant differences are found for the MSE-optimal bandwidth ($-0.223^\circ$, mean $5.708^\circ$) and the 3000m bandwidth ($-0.112^\circ$, mean $5.496^\circ$), while the 9000m bandwidth ($0.131^\circ$, mean $5.323^\circ$) is statistically insignificant.
+Again, the differences are negligible in a geospatial context, with a maximum difference of $0.223^\circ$ on a mean of $5.708^\circ$ slope of the terrain.
+Both, elevation and slope, highlight the difference between mathematical significance and geographical significance, as the large statistical power of 287,329 observations allows for the detection of very small differences that are not meaningful in a geospatial context.
+This can also be seen in the standard errors, which are about the same as the treatment effect ($-0.112^\circ$ to $0.131^\circ$ std. error), indicating that the effect is not meaningful.
+In practical terms, a slope variation of a fraction of a degree or the elevation difference of a few meters is unlikely to have a significant impact on vegetation health.
+
+Panel C shows the distance to the nearest colonial railroad. The treatment effect is statistically insignificant across all bandwidths.
+The MSE-optimal bandwidth shows a treatment effect of $-115.232$m (mean $18942.535$m), the 3000m bandwidth $239.719$m (mean $19239.134$m), and the 9000m bandwidth $3067.880$m (mean $19764.526$m).
+
+Finally, Panel D evaluates the distance to the nearest colonial city (1890-1900). Within the MSE-optimal bandwidth, the treatment effect is statistically insignificant ($-302.615$m, mean $367918.619$m), similarly for the 3000m bandwidth ($5465.393$m, mean $369220.365$m).
+This changes at the 9000m bandwidth, where the treatment effect becomes statistically significant at the 1\% level ($10873.626$m, mean $380229.753$m).
+While a difference of about 10.9 kilometers accounts for less than 3\% of the mean distance, it is highly significant.
+This should be taken into account when interpreting the results of the 9km bandwidth robustness check, as the treatment and control group are not comparable in terms of distance to colonial cities in this case.
+
+\subsubsection{Results including Robustness Checks}
+
+\cref{tab:base_baseline_results} shows the main results of the Spatial RDD, estimating the local average treatment effect of settlement schemes on vegetation health.
+The vegetation indices, NDVI and NDMI, are shown as Panels A and B.
+In almost every specification, the results show a statistically significant negative treatment effect, which is significant at least at the 5\% level.
+This suggests a negative impact of settlement schemes on vegetation health.
+
+
+\begin{customltable}
+    \caption{Main Results for Vegetation Impact (NDVI and NDMI)}
+    \label{tab:base_baseline_results}
+    \setlength{\tabcolsep}{10pt}
+    
+    \tablerendering{tableBase_Baseline}
+    
+    \tabnotes{The table shows the LATE of settlement schemes from 1965 to 2013 on NDVI and NDMI aggregated for the time period 2023 to 2025.
+    Treatment effects, std. errors and means are multiplied by 100 for better readability.
+    Column (1) presents the basic model with no covariates, column (2) includes geographic covariates (elevation, slope, distance to colonial railroad and city).
+    Column (3) applies a 300m buffer to the treatment assignment around the cutoff.
+    Columns (4) and (5) test different bandwidths, (4) uses a 3000m bandwidth and (5) uses a 9000m bandwidth.
+    Column (6) excludes the non-georeferenced settlements approximated by circles.
+    Point estimates are conventional, with robust standard errors clustered at the 1200m grid level. *** $p < 0.01$, ** $p < 0.05$, * $p < 0.1$.}
+\end{customltable}
+
+\paragraph{Baseline.}
+Columns (1) and (2) establish the baseline findings.
+In the basic model without covariates, the assignment to a settlement scheme reduces the NDVI at a significant level by $0.00707$ and the NDMI by $0.00786$ (on a sample mean of $0.609$ / $0.144$).
+When interpreting these results, it is important to note that the sample size of about 79,000 observations within the MSE-optimal bandwidth (79,013 for NDVI and 79,686 for NDMI) results in a high statistical power.
+Therefore, while the significance of the results is important, the stability and magnitude of the treatment effect are also relevant for interpretation.
+
+When including covariates in column (2), as predicted, the robust standard errors decrease further to $0.00260$ for NDVI and $0.00263$ for NDMI.
+At the same time, the treatment effect decreases to $0.00593$ for NDVI and $0.00726$ for NDMI, which is a reduction of about 16/8\% compared to an error reduction of about 16\%.
+This could indicate that the covariates are correlated with other unobserved variables that also affect vegetation health, which will be further analyzed in \cref{subsec:limitations}.
+
+To account for small-scale spatial spillover effects, column (3) applies a 300m buffer to the treatment assignment around the cutoff.
+This decreases the sample size to 48,885 observations (53,464 for NDMI) and the treatment effect to $0.00009$ and $0.00300$, while increasing the robust standard errors to $0.00477$ and $0.00440$.
+Simultaneously, both indices lose statistical significance, which is expected, as the discontinuity in vegetation health is likely to be the strongest near the cutoff line.
+
+\paragraph{Different bandwidths.} 
+Columns (4) and (5) show the results of using different bandwidths.
+Column (4) uses a fixed 3000m bandwidth around the cutoff line.
+With a sample size of 161,845 observations, the treatment effect decreases to $0.00356$ for NDVI and $0.00464$ for NDMI, with the standard error at $0.00268$ in both indices.
+With both indices at the 5\% significance level, this shows that expanding the bandwidth attenuates the treatment effect.
+
+In contrast, expanding the bandwidth to 9,000m in column (5) leads to a loss of statistical significance in NDVI and marginal significance at the 10\% level in NDMI,
+with treatment effects of $0.00397$ and $0.00500$ respectively.
+This reduction in significance despite a larger sample size of 287,329 is likely due to the violation of RDD assumptions such as comparability at this bandwidth.
+As demonstrated in the previous section, the Covariate Balance Tests show a significant difference in distance to the nearest colonial city at this bandwidth.
+Together, this indicates that the MSE-optimal and 3000m bandwidths are more appropriate for the analysis.
+
+\paragraph{Excluding non-georeferenced settlements.}
+Column (6) shows the results of excluding the non-georeferenced settlements approximated by circles from the model with covariates.
+This reduces the sample size to 67,943 observations (69,383 for NDMI), however in contrast to the previous robustness check,
+simultaneously the treatment effect increases by about 18/25\% (to $0.00702$ and $0.00907$), while the standard errors only increase by about 7/10\% ($0.00277$ and $0.00288$) compared to column (2).
+This indicates that the missing boundary information of about 30\% of the settlement schemes introduces a measurement error, lowering the estimated impact of settlement.
+
+Overall, stronger effects can be observed with NDMI as a dependent variable compared to NDVI.
+This is expected, as even though the NDVI is more frequently used in scientific literature, the NDMI should vary more under a tree canopy this dense, as explained in \cref{sec:data}.

@@ -1,0 +1,26 @@
+\subsection{Limitations of the Study}
+\label{subsec:limitations}
+When interpreting the overall findings of this study, several limitations should be considered.
+
+First, the most important limitation is the lack of georeferenced boundaries for about $30\%$ of settlement schemes.
+The approximation of these boundaries using circles introduces a measurement error that artificially reduces the treatment effect.
+As the model chosen for this study is a discontinuity design, which measures the difference in outcomes between the treatment and control group at or close to the cutoff line, this becomes especially relevant, requiring the line to be as precise as possible.
+This can be observed when comparing the results of both regressions, where the exclusion of settlements with unknown boundaries has opposite impacts on the results produced.
+However, excluding those settlements reduces the sample size and completely removes the impact of about $30\%$ of the data, which could introduce a bias.
+
+Second, the covariates used in the model are limited to the available data and do not include all possible preexisting differences between the treatment and control groups.
+For example, the state of forests and vegetation in the area before the allocation is not known.
+As mentioned by \cite{leoLandClassKenya1984}, some land allocated to settlement schemes was of lower soil quality, which could have affected the existing vegetation health and forest cover.
+Access to more covariates could improve the estimator and produce more accurate results for the Covariate Balanced Test, detecting preexisting differences more reliably.
+
+Third, the quality of counterfactuals is limited, as most of the land located around settlement schemes was also subsequently privatized and used by individuals.
+As data needed for the calculation of NDVI, NDMI and TMF is only available from 1980 / 1990 onwards, the immediate effects of the allocation of land to settlement schemes while surrounding areas were still unallocated cannot be measured.
+For visualization, \cref{fig:desc_treatment_control_diff} shows one example of a settlement scheme and the surrounding counterfactual, which appear to be used in the same way.
+
+Another bias can also be viewed when comparing the estimations created by both models at different bandwidths.
+The changes in significance and treatment effects indicate that the results are sensitive to the choice of bandwidth, which is expected in a discontinuity design.
+Nonetheless, the choice of bandwidth is a limitation.
+
+Lastly, the large sample size of up to 287,000 observations results in exceptionally high statistical power.
+This causes the detection of small, perhaps irrelevant effects to become statistically significant.
+The same mechanism that allows for this detection of small effects also leads to small covariate differences like $0.112^\circ$ of change in slope to appear significant, thus invalidating the related model.
